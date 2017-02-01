@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="heyzap-cordova-adcolony" version="1.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <name>Heyzap Cordova AdColony</name>
+  <description>AdColony Cordova plugin for the Heyzap Cordova Plugin</description>
+  <author>Heyzap Inc.</author>
+  <license>Heyzap</license>
+  <keywords>cordova,heyzap,phonegap,sdk,ad,mobile,mediation,adcolony</keywords>
+
+  <engines>
+    <engine name="cordova-android" version=">=4.0.0" />
+    <engine name="cordova-ios" version=">=3.8.0" />
+  </engines>
+
+  <!-- iOS -->
+  <platform name="ios">
+
+    <!-- iOS 9 requires apps to use HTTPS; some networks require you to disable App Transport Security to workaround this. -->
+    <config-file target="*-Info.plist" parent="NSAppTransportSecurity">
+      <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+      </dict>
+    </config-file>
+
+    <!-- URL scheme required by network -->
+    <config-file target="*-Info.plist" parent="LSApplicationQueriesSchemes">
+      <array>
+        <string>fb</string>
+        <string>instagram</string>
+        <string>tumblr</string>
+        <string>twitter</string>
+      </array>
+    </config-file>
+
+    <!-- Hooks -->
+    <hook type="before_plugin_install" src="hooks/before_plugin_install/000_create_symlinks.js" />
+    <!-- / Hooks -->
+
+    <!-- AdColony SDK -->
+    <framework src="src/ios/Fyber_AdColony_2.6.2-r1.framework" custom="true" compiler-flags="-fmodules" />
+    <!-- / AdColony SDK -->
+
+    <!-- External Frameworks -->
+    <framework src="AudioToolbox.framework" />
+    <framework src="AVFoundation.framework" />
+    <framework src="CoreGraphics.framework" />
+    <framework src="CoreMedia.framework" />
+    <framework src="CoreTelephony.framework" />
+    <framework src="EventKit.framework" />
+    <framework src="EventKitUI.framework" />
+    <framework src="MediaPlayer.framework" />
+    <framework src="MessageUI.framework" />
+    <framework src="QuartzCore.framework" />
+    <framework src="SystemConfiguration.framework" />
+
+    <framework src="AdSupport.framework" weak="true" />
+    <framework src="Social.framework" weak="true" />
+    <framework src="StoreKit.framework" weak="true" />
+    <framework src="WebKit.framework" weak="true" />
+
+    <framework src="libz.dylib"/>
+    <!-- / External Frameworks -->
+
+  </platform>
+  <!-- / iOS -->
+
+  <!-- Android -->
+  <platform name="android">
+
+    <framework src="src/android/adcolony.gradle" custom="true" type="gradleReference" />
+    <!-- AdColony SDK -->
+    <source-file src="src/android/fyber-adcolony-2.3.6-r2.aar" target-dir="libs" />
+    <!-- / AdColony SDK -->
+
+  </platform>
+  <!-- / Android -->
+
+</plugin>
